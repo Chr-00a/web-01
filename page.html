@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
     <style type="text/css">
+        /*代码写的越急，程序跑得越慢。*/
         body{
             margin: 0;
             height: 100%;
-            
+            font-family: Arial, sans-serif;
         }
-        /* 如果代码和注释不一致，那很可能两者都错了。 */
         .header{
             background-color: rgba(155, 148, 148, 0.521);
             height: 100px;
@@ -19,20 +19,15 @@
             align-items: center; 
             padding: 0 1em;
         }
-
         #header-one{
             margin-right: 25px;
             font-size: 20px; 
             color: #000; 
         }
-
         .header a {
             color: #333; 
             text-decoration: none;
-            
         }
-        
-        
         #content{
             height: 300px;
             background: linear-gradient(
@@ -45,13 +40,12 @@
             margin-bottom: 0; 
             height: 100%;     
         }
-
         #content #music,
         #content #my {
             border: solid 0px transparent;
             flex: 1 1 0;
         }
-
+        /* 80%的表单会要你回答没有必要的问题。 */
         .footer{
             background: rgb(119, 119, 119);
             height: 200px;
@@ -72,8 +66,8 @@
         }
 
         #content #my {
-            left: 5px;
-            text-align: center;
+            padding-left: 20px; 
+            text-align: left;
         }
 
         #content img {
@@ -88,7 +82,7 @@
             mix-blend-mode: screen; 
             z-index: 1; 
         }
-        /* 避免使用不对称结构。 */
+
         #content p{
             font-size: 25px;
             color: #000;
@@ -96,6 +90,35 @@
             margin-top: 30px;
             margin-right: 20px;
         }
+
+        .my-text {
+            position: relative; 
+            display: inline-block;
+            margin-top: 30px;
+        }
+
+        .my-text p {
+            font-size: 23px;
+            color: #000;
+            margin: 0;
+            
+            display: inline-block;
+        }
+
+        #typing-text {
+            display: inline-block;
+            overflow: hidden; 
+            border-right: 1.5px solid #000; 
+            white-space: nowrap; 
+            animation: blink 0.7s step-end infinite; 
+        }
+
+        #my{
+              font-family: kaiti, "华文楷体"; 
+              margin-top: 15px;
+              margin-right: 10px;
+        }
+        /* 别在注释里陷得太深——注释很可能会误导你，你要调试的只是代码。 */
     </style>
 </head>
 <body>
@@ -104,7 +127,7 @@
             <a href="https://github.com/Chr-00a">GitHub</a>
         </div>
         <div id="header-one">
-            <a href="#">template</a>
+            <a href="./template.html">template</a>
         </div>
         <div id="header-one">
             <a href="#">img</a>
@@ -113,18 +136,18 @@
             <a href="#">导航</a>
         </div>
         <div id="header-one">
-            <a href="#">动态</a>
+            <a href="#">Home</a>
         </div>
-        
     </div>
-    
     <div id="content">
         <div id="music">
             <img src='./girl_kimono_neko_1092194_1366x768(1).jpg'>
         </div>
         <div id="my">
-            <p>hello</p>
-            <p>Make a user interface as consistent<br>and as predictable as possible.</p>
+            <p id="title">[The Principle of Least Astonishment] </p>
+            <div class="my-text">
+                <p id="typing-text"></p>
+            </div>
         </div>
     </div>
     <div class="footer">
@@ -132,11 +155,12 @@
     </div>
 
     <script>
-        // 别在注释里陷得太深——注释很可能会误导你，你要调试的只是代码。
+        // 东西没坏，就别乱修。
 
         const texts = [
             "‘任意’键在哪里？",
             "海内存知己，天涯若比邻。",
+            "PHP是世界上最好的编程语言.",
             "無限进步！",
             "代码跑起来我们再聊。",
             "知之为知之，不知为不知，是知也.",
@@ -144,11 +168,24 @@
             "代码的美在于简洁，诗的美在于意境。"
         ];
 
-        
         const footerTextElement = document.getElementById("footer-text");
-
         const randomText = texts[Math.floor(Math.random() * texts.length)];
         footerTextElement.textContent = randomText;
+
+        // 动态效果
+        const typingTextElement = document.getElementById("typing-text");
+        const typingText = "  Make a user interface as consistent and as predictable as possible.";
+        let index = 0;
+
+        function typeWriter() {
+            if (index < typingText.length) {
+                typingTextElement.textContent += typingText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100); 
+            }
+        }
+
+        typeWriter();
     </script>
 </body>
 </html>
